@@ -1,42 +1,61 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Twiddler Party</title>
     <script src="jquery.js"></script>
     <script src="dataGenerator.js"></script>
-    $('.center-me').centerElement();
+    <link rel="stylesheet" href="style.css" media="screen" />
   </head>
   <body>
     <script>
 
+
       $(document).ready(function(){
+        var $body = $("body");
+        $body.html('');
 
-        var $body = $('body');
-        $body.html('Twiddler Party');
-        $("body").css({
-          fontSize: "20px",
-          color: "#1DA1F2",
-          background: "white",
-          margin: "0px 50px 0px 50px",
-          display: "inline-block",
-          float: "left",
-          fontweight: "bold"
-        });
+        var $header = $('<header></header>');
+        $header.html('<h1>Twiddler Party</h1>');
+        $header.appendTo($body);
 
+        var $mainNavigation = $('<main></main>')
+         $mainNavigation.appendTo($body);
 
-        // $('body').css({'text-align':'center'});
+         var $loadMoreTweetsButton = $('<button></button')
+          $loadMoreTweetsButton.text('Click More Tweets')
+          $loadMoreTweetsButton.appendTo($mainNavigation)
+
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+          var $tweet = $('<div class="tweet"</div>');
+          var date = new Date()
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + "\n" + date);
+          $tweet.appendTo($body)
           index -= 1;
-
-
         }
+
+
 
       });
 
     </script>
   </body>
 </html>
+
+<!-- Show the user new tweets somehow. (You can show them automatically as they're created, or create a button that displays new tweets.)
+Display the timestamps of when the tweets were created. This timestamp should reflect the actual time the tweets were created, and should not just be hardcoded.
+Design your interface so that you want to look at and use the product you're making.
+Allow the user to click on a username to see that user's timeline. -->
+
+
+<!-- Advanced
+
+ Show when the tweets were created in a human-friendly way (eg "10 minutes ago"). You'll want to find and use a library for this.
+ Allow the user to tweet. -->
+
+ <!-- Sources
+
+ https://css-tricks.com/guides/beginner/
+ https://www.w3schools.com/cssref/
+ https://api.jquery.com/ -->
