@@ -3,14 +3,27 @@
   <head>
     <script src="jquery.js"></script>
     <script src="dataGenerator.js"></script>
+    $('.center-me').centerElement();
   </head>
   <body>
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
 
+        var $body = $('body');
+        $body.html('Twiddler Party');
+        $("body").css({
+          fontSize: "20px",
+          color: "#1DA1F2",
+          background: "white",
+          margin: "0px 50px 0px 50px",
+          display: "inline-block",
+          float: "left",
+          fontweight: "bold"
+        });
+
+
+        // $('body').css({'text-align':'center'});
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
@@ -18,6 +31,8 @@
           $tweet.text('@' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body);
           index -= 1;
+
+
         }
 
       });
