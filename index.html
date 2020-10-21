@@ -7,46 +7,54 @@
     <link rel="stylesheet" href="style.css" media="screen" />
   </head>
   <body>
+
     <script>
-
-
       $(document).ready(function(){
         var $body = $("body");
         $body.html('');
 
         var $header = $('<header></header>');
-        $header.html('<h1>Twiddler Party</h1>');
-        $header.appendTo($body);
-
-        var $mainNavigation = $('<main></main>')
-         $mainNavigation.appendTo($body);
+          $header.html('<h1>Twiddler Party</h1>');
+          $header.appendTo($body);
 
          var $loadMoreTweetsButton = $('<button></button')
           $loadMoreTweetsButton.text('Click More Tweets')
-          $loadMoreTweetsButton.appendTo($mainNavigation)
+          $loadMoreTweetsButton.appendTo($body)
+          $loadMoreTweetsButton.click(function() {
+            loadTweets();
+          });
+
+          var $tweets = $('<div class="tweets"> </div>');
+          $tweets.appendTo(body);
+
+      function loadTweets() {
+        $tweets.html('')
 
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div class="tweet"</div>');
-          var date = new Date()
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + "\n" + date);
+          var seconds = new Date($.now())
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + '\n' + seconds);
           $tweet.appendTo($body)
           index -= 1;
         }
-
-
-
+      }
+       loadTweets();
       });
 
     </script>
   </body>
 </html>
 
-<!-- Show the user new tweets somehow. (You can show them automatically as they're created, or create a button that displays new tweets.)
-Display the timestamps of when the tweets were created. This timestamp should reflect the actual time the tweets were created, and should not just be hardcoded.
-Design your interface so that you want to look at and use the product you're making.
-Allow the user to click on a username to see that user's timeline. -->
+<!--
+  Show the user new tweets somehow. (You can show them automatically as they're created, or create a button that displays new tweets.)
+
+  Display the timestamps of when the tweets were created. This timestamp should reflect the actual time the tweets were created, and should not just be hardcoded.
+
+  Design your interface so that you want to look at and use the product you're making.
+
+  Allow the user to click on a username to see that user's timeline. -->
 
 
 <!-- Advanced
