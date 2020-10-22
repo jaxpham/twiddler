@@ -4,7 +4,7 @@
     <title>Twiddler Party</title>
     <script src="jquery.js"></script>
     <script src="dataGenerator.js"></script>
-    <link rel="stylesheet" href="style.css" media="screen" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
 
@@ -13,16 +13,30 @@
         var $body = $("body");
         $body.html('');
 
-        var $header = $('<header></header>');
-          $header.html('<h1>Twiddler Party</h1>');
+          var $header = $('<header></header>');
+          $header.html('<h1>Twiddler</h1>');
           $header.appendTo($body);
 
+          var $navbar = $('<div class=navbar></div>');
+          $navbar.appendTo($body);
+
+          var $column1 = $('<div class=column1></div>');;
+          $column1.appendTo($body);
+
+          var $column2 = $('<div class=column2></div>');
+          $column2.appendTo($body);
+
+          var $column3 = $('<div class=column3></div>');
+          $column3.appendTo($body);
+
+
          var $loadMoreTweetsButton = $('<button></button')
-          $loadMoreTweetsButton.text('Click More Tweets')
-          $loadMoreTweetsButton.appendTo($body)
+          $loadMoreTweetsButton.text('New Tweets')
+          $loadMoreTweetsButton.appendTo($column2)
           $loadMoreTweetsButton.click(function() {
             loadTweets();
           });
+
 
           var $tweets = $('<div class="tweets"> </div>');
           $tweets.appendTo(body);
@@ -34,9 +48,9 @@
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div class="tweet"</div>');
-          var seconds = new Date($.now())
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + '\n' + seconds);
-          $tweet.appendTo($body)
+          var time = new Date().toLocaleTimeString(); 
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + '   at   ' + time);
+          $tweet.appendTo($column2)
           index -= 1;
         }
       }
@@ -48,13 +62,18 @@
 </html>
 
 <!--
-  Show the user new tweets somehow. (You can show them automatically as they're created, or create a button that displays new tweets.)
+ *Done Show the user new tweets somehow. (You can show them automatically as they're created, or create a button that displays new tweets.)
 
-  Display the timestamps of when the tweets were created. This timestamp should reflect the actual time the tweets were created, and should not just be hardcoded.
+ *DONE Display the timestamps of when the tweets were created. This timestamp should reflect the actual time the tweets were created, and should not just be hardcoded.
 
-  Design your interface so that you want to look at and use the product you're making.
+ *Done Design your interface so that you want to look at and use the product you're making.
 
-  Allow the user to click on a username to see that user's timeline. -->
+  Allow the user to click on a username to see that user's timeline.
+    Click function
+    Another page
+    Filters only the users posts
+
+-->
 
 
 <!-- Advanced
