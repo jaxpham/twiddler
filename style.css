@@ -61,7 +61,7 @@ button:hover {
   font-size: 30px;
   font-family: fantasy, cursive;
   color: white;
-  border: solid 1px #F24D29;
+  border: solid 1px #943019;
 }
 
 .user {
@@ -70,7 +70,7 @@ button:hover {
 }
 
 .user:hover {
-  color: red;
+  color: #F24D29;
 }
 
 h6 {
@@ -78,3 +78,6 @@ h6 {
   font-family: fantasy, cursive;
   color: white;
 }
+
+
+/* can we pseudeo code */
