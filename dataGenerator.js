@@ -3,6 +3,20 @@
  * You can safely leave this file untouched, and confine your changes to index.html.
  */
 
+ /*
+ input:
+          window - obj
+                  streams - obj
+                              users - arr
+                                        tweet - obj
+                                                   user - strings
+                                                   messages - string
+                                                   created_at - string date / time
+
+*/
+
+
+
 // set up data structures
 window.streams = {};
 streams.home = [];
