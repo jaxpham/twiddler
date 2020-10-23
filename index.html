@@ -82,11 +82,17 @@
          var $homeButton = $('<button></button')
           $homeButton.text('Home Button')
           $homeButton.appendTo($column1)
+          $homeButton.click(function() {
+            loadTweets();
+          });
 
           //Refresh Button
          var $refresh = $('<button></button')
           $refresh.text('Refresh')
           $refresh.appendTo($column3)
+          $refresh.click(function() {
+            loadTweets();
+          });
 
 
 
@@ -210,6 +216,6 @@ Advanced
  https://css-tricks.com/guides/beginner/
  https://www.w3schools.com/html/html_layout.asp 
  https://www.w3schools.com/cssref/
- https://api.jquery.com/
+ https://api.jquery.com/git
 
 -->
