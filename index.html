@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Twiddler Party</title>
+    <title>Twiddler</title>
     <script src="jquery.js"></script>
     <script src="dataGenerator.js"></script>
     <link rel="stylesheet" href="style.css" />
@@ -13,6 +13,7 @@
         var $body = $("body");
         $body.html('');
 
+          //Layout
           var $header = $('<header></header>');
           $header.html('<h1>Twiddler</h1>');
           $header.appendTo($body);
@@ -30,48 +31,112 @@
           $column3.appendTo($body);
 
 
-         var $loadMoreTweetsButton = $('<button></button')
-          $loadMoreTweetsButton.text('New Tweets')
-          $loadMoreTweetsButton.appendTo($column2)
-          $loadMoreTweetsButton.click(function() {
+          //New Tweets Button
+         var $newTweetsButton = $('<button></button')
+          $newTweetsButton.text('New Tweets')
+          $newTweetsButton.appendTo($column2)
+          $newTweetsButton.click(function() {
             loadTweets();
           });
 
+          //Home Button
+         var $homeButton = $('<button></button')
+          $homeButton.text('Home Button')
+          $homeButton.appendTo($column1)
 
+          //Home Refresh Button
+         var $refresh = $('<button></button')
+          $refresh.text('Refresh')
+          $refresh.appendTo($column3)
+
+
+         //Tweets Section
           var $tweets = $('<div class="tweets"> </div>');
-          $tweets.appendTo(body);
+          $tweets.appendTo($column2);
 
-      function loadTweets() {
-        $tweets.html('')
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div class="tweet"</div>');
-          var time = new Date().toLocaleTimeString(); 
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + '   at   ' + time);
-          $tweet.appendTo($column2)
-          index -= 1;
-        }
-      }
-       loadTweets();
-      });
+
+         function loadTweets() {
+           $tweets.html('')
+
+           var index = streams.home.length - 1;
+
+           while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div class="tweet"</div>');
+            var time = new Date().toLocaleTimeString();
+            var user = tweet.user;
+            $tweet.append('@' + '<a class ="user">' + user + '</a>' +': ' + tweet.message + ' at ' + time);
+            $tweet.appendTo($tweets)
+            index -= 1;
+           }
+
+
+            // //function to hide all tweets
+            // $('.user').click(function() {
+            //  $tweets.hide()
+            //  });
+
+           userTweets();
+         }
+
+
+         //input:
+          //window - obj
+                  //streams - obj
+                              //users - arr
+                                        // tweet - obj
+                                                   // user - strings
+                                                   // messages - string
+                                                   //created_at - string date / time
+           //output:
+           //filtered version of a user if clicked on
+
+          // Click function to make it do something
+          //sets html to text
+          //look for all the data with username
+          //extract data and put on web page
+
+         function userTweets() {
+
+            $('.user').click(function() {
+            document.querySelector('.tweets').innerHTML = ""
+            var userName = $(this).text();
+            var userTime = new Date().toLocaleTimeString();
+            var $tweet = $('<div class="tweet"</div>');
+            for (var key in streams.users) {
+              for (var i = 0; i < streams.users[key].length; i++) {
+                if (streams.users[key][i].user === userName) {
+                  filterTweets = streams.users[key][i].user + " " + streams.users[key][i].message + " at " + userTime;
+                  // console.log(filterTweets)
+                  $tweet.append( '<h6>' + '@ '+ filterTweets + '<h6>' );
+                  $tweet.appendTo($tweets)
+                }
+              }
+            }
+
+           });
+
+         }
+
+         loadTweets();
+        });
 
     </script>
   </body>
 </html>
 
 <!--
- *Done Show the user new tweets somehow. (You can show them automatically as they're created, or create a button that displays new tweets.)
+ *DONE Show the user new tweets somehow. (You can show them automatically as they're created, or create a button that displays new tweets.)
 
  *DONE Display the timestamps of when the tweets were created. This timestamp should reflect the actual time the tweets were created, and should not just be hardcoded.
 
- *Done Design your interface so that you want to look at and use the product you're making.
+ *DONE Design your interface so that you want to look at and use the product you're making.
 
-  Allow the user to click on a username to see that user's timeline.
-    Click function
-    Another page
-    Filters only the users posts
+ *DONE Allow the user to click on a username to see that user's timeline.
+    Make the user name clickable
+    Filters posts for only the users
+    Create button to unfilter
 
 -->
 
