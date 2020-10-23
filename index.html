@@ -6,6 +6,43 @@
     <script src="dataGenerator.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
+
+  <!--
+  <!DOCTYPE html>:
+    All HTML DOCs start with !Doctype html - information to browser type to expect
+
+  <head></head>:
+    Container for meta data is not displayed
+
+  <html></html>:
+    Tag is the root of html doc and is container for all HTML elements. There is a closing one on the bottom
+
+  <link rel="stylesheet" href="style.css"/> :
+    ink rel="stylesheet": Description of relationship between current doc and linked doc
+    href: Specifies URL and is click to go to the location of doc
+
+  <head></head>:
+    Container for meta (data about data) placed between html and body tags.
+    Meta data is not displayed
+
+  <body><body>:
+    Document body - contains all contents of HTML document, such as heads, paragraphs, images, hyperlinks, tables, lists, etc.
+    Can only be one.
+
+  <script></script>:
+    Tag is used to embed a client-side script (JavaScript).
+    Element either contains scripting statements, or it points to an external script file through the src attribute.
+    Common uses for JavaScript are image manipulation, form validation, and dynamic changes of content.
+
+  <Doc. ready>:
+    The ready method is used to make a function available after the document is loaded. Whatever code you write inside the document.ready method will run once the page DOM  (Documnet Object Model) ready to execute Javascript code
+    DOM - API for HTML and XML 0 Defines logical structure of docmuments and the way a document is accessed and manipulated.
+
+  <div class= ""></div>:
+    Tag that defines a devision or a section in HTML doc. The <div> tag is used as a container for HTML elements - which is then styled with CSS or manipulated with Javascript. The <div> tag is easily styled by using the class or id attribute.
+
+  -->
+
   <body>
 
     <script>
@@ -13,7 +50,7 @@
         var $body = $("body");
         $body.html('');
 
-          //Layout
+          //LAYOUT - Different Sections of the body cut into blocks of areas using CSS for styling
           var $header = $('<header></header>');
           $header.html('<h1>Twiddler</h1>');
           $header.appendTo($body);
@@ -31,7 +68,9 @@
           $column3.appendTo($body);
 
 
-          //New Tweets Button
+          //BUTTONS
+
+          //New Tweets Button - Has a click function that calls the loadtweets function
          var $newTweetsButton = $('<button></button')
           $newTweetsButton.text('New Tweets')
           $newTweetsButton.appendTo($column2)
@@ -44,17 +83,32 @@
           $homeButton.text('Home Button')
           $homeButton.appendTo($column1)
 
-          //Home Refresh Button
+          //Refresh Button
          var $refresh = $('<button></button')
           $refresh.text('Refresh')
           $refresh.appendTo($column3)
 
 
-         //Tweets Section
+
+         //TWEETS
           var $tweets = $('<div class="tweets"> </div>');
           $tweets.appendTo($column2);
 
 
+        /*
+        Function - Loads / Generates Tweets function Using the dataGenerator.js
+          $tweets.html
+          Declare index var assinged to streams.home array Length which is all generated tweets
+          Loop through from starting point index 0 {from end of tweets to beginning}
+          Create var $tweet: To seperate each individual generated tweet
+          Create variable time: To add time to end
+          Create user variable: which is the same as streams.home[index].user
+          Append the message to the $tweet (div class tweet) above it
+          Append the tweet to $tweets which is the div class appended to the column2 on line 94
+          Decrement the while loop by 1 to access all tweets in streams.home
+
+          Call the userTweets function because the first loop runs generate the tweets
+        */
 
          function loadTweets() {
            $tweets.html('')
@@ -70,35 +124,44 @@
             $tweet.appendTo($tweets)
             index -= 1;
            }
-
-
-            // //function to hide all tweets
-            // $('.user').click(function() {
-            //  $tweets.hide()
-            //  });
-
            userTweets();
          }
 
+         /*
+         INPUT:
+          window - obj
+                  streams - obj
+                              users - arr
+                                        tweet - obj
+                                                   user - strings
+                                                   messages - string
+                                                   created_at - string date / time
 
-         //input:
-          //window - obj
-                  //streams - obj
-                              //users - arr
-                                        // tweet - obj
-                                                   // user - strings
-                                                   // messages - string
-                                                   //created_at - string date / time
-           //output:
-           //filtered version of a user if clicked on
+          OUTPUT:
+           filtered version of a user if clicked on
 
-          // Click function to make it do something
-          //sets html to text
-          //look for all the data with username
-          //extract data and put on web page
+          HIGH LEVEL PSEUDOCODE
+          Click function to make it do something
+          Set html to text
+          Look for all the data with username
+          Extract data and put on web page
+
+          MID LEVEL PSUEDOCODE
+          Create function UserTweets - To display only user tweets
+          Create a click function - for the .user
+          Create a new Function for userTweets - function userTweets() { }:
+          Clears the '.tweets' class which houses all tweets - document.querySelector('.tweets').innerHTML = "" :
+          Create a userName variable to convert clicked on html into text: var userName = $(this).text()
+          Create time function to add time into tweet
+          Create $tweet variable again: To seperate each individual generated tweet
+          Create nested For in and for loop to access the the data inside streams.user reference input above
+          Conditional to confirm that the data is equal to the userName that was html that was converted to text
+          Append it to a new h6 subheader
+          Append to tweets
+          Call the loadTweets function
+          */
 
          function userTweets() {
-
             $('.user').click(function() {
             document.querySelector('.tweets').innerHTML = ""
             var userName = $(this).text();
@@ -108,7 +171,6 @@
               for (var i = 0; i < streams.users[key].length; i++) {
                 if (streams.users[key][i].user === userName) {
                   filterTweets = streams.users[key][i].user + " " + streams.users[key][i].message + " at " + userTime;
-                  // console.log(filterTweets)
                   $tweet.append( '<h6>' + '@ '+ filterTweets + '<h6>' );
                   $tweet.appendTo($tweets)
                 }
@@ -138,16 +200,16 @@
     Filters posts for only the users
     Create button to unfilter
 
--->
+Advanced
 
+  Show when the tweets were created in a human-friendly way (eg "10 minutes ago"). You'll want to find and use a library for this.
+  Allow the user to tweet.
 
-<!-- Advanced
-
- Show when the tweets were created in a human-friendly way (eg "10 minutes ago"). You'll want to find and use a library for this.
- Allow the user to tweet. -->
-
- <!-- Sources
+ Sources
 
  https://css-tricks.com/guides/beginner/
+ https://www.w3schools.com/html/html_layout.asp 
  https://www.w3schools.com/cssref/
- https://api.jquery.com/ -->
+ https://api.jquery.com/
+
+-->
