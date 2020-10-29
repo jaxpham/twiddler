@@ -108,7 +108,7 @@
           Declare index var assinged to streams.home array Length which is all generated tweets
           Loop through from starting point index 0 {from end of tweets to beginning}
           Create var $tweet: To seperate each individual generated tweet
-          Create variable time: To add time to end
+          Create variable time: To add time to end accessing the data from the datagenerator
           Create user variable: which is the same as streams.home[index].user
           Append the message to the $tweet (div class tweet) above it
           Append the tweet to $tweets which is the div class appended to the column2 on line 94
@@ -125,9 +125,9 @@
            while(index >= 0){
             var tweet = streams.home[index];
             var $tweet = $('<div class="tweet"</div>');
-            var time = new Date().toLocaleTimeString();
+            var time = tweet.created_at.toLocaleTimeString();
             var user = tweet.user;
-            $tweet.append('@' + '<a class ="user">' + user + '</a>' +': ' + tweet.message + ' at ' + time);
+            $tweet.append('@' + '<a class ="user">' + user + '</a>' +': ' + tweet.message + ' at ' + '  ' + time);
             $tweet.appendTo($tweets)
             index -= 1;
            }
@@ -159,12 +159,15 @@
           Create a new Function for userTweets - function userTweets() { }:
           Clears the '.tweets' class which houses all tweets - document.querySelector('.tweets').innerHTML = "" :
           Create a userName variable to convert clicked on html into text: var userName = $(this).text()
-          Create time function to add time into tweet
           Create $tweet variable again: To seperate each individual generated tweet
           Create nested For in and for loop to access the the data inside streams.user reference input above
+          Create filterUser variable to access the user name
+          Create filterMessage variable to access the user message
+          Create filterTime variable to access the user created_at time
           Conditional to confirm that the data is equal to the userName that was html that was converted to text
+          FilterTweets  = filterUser + filterUser + " " + filterMessage + " at " + "  " + filterTime
           Append it to a new h6 subheader
-          Append to tweets
+          Append to $tweets
           Call the loadTweets function
           */
 
@@ -172,12 +175,16 @@
             $('.user').click(function() {
             document.querySelector('.tweets').innerHTML = ""
             var userName = $(this).text();
-            var userTime = new Date().toLocaleTimeString();
             var $tweet = $('<div class="tweet"</div>');
             for (var key in streams.users) {
               for (var i = 0; i < streams.users[key].length; i++) {
+
+                 var filterUser = streams.users[key][i].user;
+                 var filterMessage = streams.users[key][i].message
+                 var filterTime = streams.users[key][i].created_at.toLocaleTimeString();
+
                 if (streams.users[key][i].user === userName) {
-                  filterTweets = streams.users[key][i].user + " " + streams.users[key][i].message + " at " + userTime;
+                  filterTweets = filterUser + " " + filterMessage + " at " + "  " + filterTime;
                   $tweet.append( '<h6>' + '@ '+ filterTweets + '<h6>' );
                   $tweet.appendTo($tweets)
                 }
@@ -215,7 +222,7 @@ Advanced
  Sources
 
  https://css-tricks.com/guides/beginner/
- https://www.w3schools.com/html/html_layout.asp 
+ https://www.w3schools.com/html/html_layout.asp
  https://www.w3schools.com/cssref/
  https://api.jquery.com/git
 
